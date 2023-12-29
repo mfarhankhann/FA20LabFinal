@@ -13,10 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Mediator {
+    private List<Observer> observers = new ArrayList<>();
     private List<Stakeholder> stakeholders = new ArrayList<>();
 
     public void registerStakeholder(Stakeholder stakeholder) {
         stakeholders.add(stakeholder);
+    }
+
+    public void registerObserver(Observer observer) {
+        observers.add(observer);
     }
 
     public void sendMessage(String message, Stakeholder sender) {
@@ -33,13 +38,16 @@ class Mediator {
                 stakeholder.receiveNotification(notification);
             }
         }
+        notifyObservers(notification);
+    }
+
+    private void notifyObservers(String message) {
+        for (Observer observer : observers) {
+            observer.updateRealTime(message);
+        }
     }
 
     public List<Stakeholder> getStakeholders() {
         return stakeholders;
-    }
-
-    void registerObserver(Observer caseManagement) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

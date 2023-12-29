@@ -14,6 +14,12 @@ class CommunicationObject {
     private Announcement announcement;
     private Notification notification;
 
+    public CommunicationObject() {
+        this.message = new Message("");
+        this.announcement = new Announcement("");
+        this.notification = new Notification("", false);
+    }
+
     public Message getMessage() {
         return message;
     }
